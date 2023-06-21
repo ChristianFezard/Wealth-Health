@@ -1,6 +1,7 @@
 import React from 'react';
 import InformationForm from '../components/InformationForm';
 
+
 const Home = () => {
     return (
         <>

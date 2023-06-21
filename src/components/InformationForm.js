@@ -5,12 +5,13 @@ import { staffDepartment } from '../data/department'
 import { updateFirstName, updateLastName, updateDateOfBirth, updateDepartment, updateStartDate, updateStreet, updateCity, updateState, updateZipCode } from '../redux/formSlice';
 import { addRow } from '../redux/tableSlice';
 import { useDispatch, useSelector } from 'react-redux';
-import Modal from 'react-modal'
+import Modal from './Modal';
 
 const InformationForm = () => {
 
     const dispatch = useDispatch();
     const [modalIsOpen, setModalIsOpen] = useState(false)
+    const [isFormValid, setIsFormValid] = useState(false)
 
     const { firstName, lastName, dateOfBirth, department, startDate, street, city, state, zipCode } = useSelector((state) => state.form)
 
@@ -52,10 +53,14 @@ const InformationForm = () => {
 
     const handleSubmit = (e) => {
         e.preventDefault()
-        dispatch(addRow({firstName, lastName, dateOfBirth, department, startDate, street, city, state, zipCode}))
-    }
+        // form validation
 
-    const openModal = () => {
+        if ( !firstName || !lastName || !dateOfBirth || !department || !startDate || !street || !city || !state || !zipCode ) {
+            setIsFormValid(true)
+            return;
+        }
+        setIsFormValid(false)
+        dispatch(addRow({firstName, lastName, dateOfBirth, department, startDate, street, city, state, zipCode}))
         setModalIsOpen(true)
     }
 
@@ -68,6 +73,7 @@ const InformationForm = () => {
 
     return (
         <section>
+            {isFormValid && <div className='error'>Please fill in all required fields</div>}
             <form className='form' onSubmit={handleSubmit}>
                 <p className='formTitle'>Information</p>
                 <div className="inputWrapper">
@@ -144,20 +150,12 @@ const InformationForm = () => {
                         className='input'
                         required
                     />
-                </div>
-            
+                </div>         
                 <p className='formTitle'>Department</p>
                 <Select options={staffDepartment} value={selectedDepartment} onChange={handleDepartment} className='dropdown' />
                 <div>
-                    <Modal
-                        isOpen={modalIsOpen}
-                        onRequestClose={closeModal}
-                        contentLabel="Employee Created Modal"
-                        className="modal"
-                    >
-                        <h2>Employee Created!</h2> 
-                    </Modal>
-                    <button type='submit' onClick={openModal}>Save</button>
+                    {modalIsOpen && <Modal closeModal={closeModal} />}
+                    <button type='submit' onClick={handleSubmit}>Save</button>
                 </div>
             </form>
         </section>
