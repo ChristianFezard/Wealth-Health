@@ -6,6 +6,7 @@ import { updateFirstName, updateLastName, updateDateOfBirth, updateDepartment, u
 import { addRow } from '../redux/tableSlice';
 import { useDispatch, useSelector } from 'react-redux';
 import Modal from './Modal';
+import DateTimePicker from 'datepickercomp-lib';
 
 const InformationForm = () => {
 
@@ -23,16 +24,16 @@ const InformationForm = () => {
         dispatch(updateLastName(e.target.value))
     }
 
-    const handleDateOfBirth = (e) => {
-        dispatch(updateDateOfBirth(e.target.value))
+    const handleDateOfBirth = (selectedDate) => {
+        dispatch(updateDateOfBirth(selectedDate))
     }
 
     const handleDepartment = (selectedDepartment) => {
         dispatch(updateDepartment(selectedDepartment.value))
     }
 
-    const handleStartDate = (e) => {
-        dispatch(updateStartDate(e.target.value))
+    const handleStartDate = (selectedDate) => {
+        dispatch(updateStartDate(selectedDate))
     }
 
     const handleStreet = (e) => {
@@ -73,7 +74,7 @@ const InformationForm = () => {
 
     return (
         <section>
-            {isFormValid && <div className='error'>Please fill in all required fields</div>}
+            {isFormValid && <div className='error'>Please fill in all the fields</div>}
             <form className='form' onSubmit={handleSubmit}>
                 <p className='formTitle'>Information</p>
                 <div className="inputWrapper">
@@ -98,20 +99,19 @@ const InformationForm = () => {
                 </div>
                 <div className="inputWrapper">
                     <label htmlFor="dateOfBirth">Date of Birth</label>
-                    <input 
-                        type="date" 
+                    <DateTimePicker
                         value={dateOfBirth}
-                        onChange={handleDateOfBirth}
+                        onDateChange={handleDateOfBirth}
                         className='input'
                         required
-                    />
+                    />    
                 </div>
                 <div className="inputWrapper">
                     <label htmlFor="startDate">Start Date</label>
-                    <input 
+                    <DateTimePicker
                         type="date" 
                         value={startDate}
-                        onChange={handleStartDate}
+                        onDateChange={handleStartDate}
                         className='input'
                         required
                     />

@@ -4,13 +4,9 @@ import { faXmark } from '@fortawesome/free-solid-svg-icons';
 
 const Modal = (props) => {
 
-    const handleModalClick = (e) => {
-        e.stopPropagation()
-    }
-
     return (
         <div className='modalContainer' onClick={props.closeModal}>
-            <div className='modal' onClick={handleModalClick}>
+            <div className='modal' >
                 Employee created !
                 <div className='close'>
                     <FontAwesomeIcon icon={faXmark}></FontAwesomeIcon>
