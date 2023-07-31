@@ -6,7 +6,7 @@ import { updateFirstName, updateLastName, updateDateOfBirth, updateDepartment, u
 import { addRow } from '../redux/tableSlice';
 import { useDispatch, useSelector } from 'react-redux';
 import Modal from './Modal';
-import DateTimePicker from 'datepickercomp-lib';
+import DatePicker from 'datepickercomp-lib'
 
 const InformationForm = () => {
 
@@ -99,7 +99,7 @@ const InformationForm = () => {
                 </div>
                 <div className="inputWrapper">
                     <label htmlFor="dateOfBirth">Date of Birth</label>
-                    <DateTimePicker
+                    <DatePicker
                         value={dateOfBirth}
                         onDateChange={handleDateOfBirth}
                         className='input'
@@ -108,7 +108,7 @@ const InformationForm = () => {
                 </div>
                 <div className="inputWrapper">
                     <label htmlFor="startDate">Start Date</label>
-                    <DateTimePicker
+                    <DatePicker
                         type="date" 
                         value={startDate}
                         onDateChange={handleStartDate}

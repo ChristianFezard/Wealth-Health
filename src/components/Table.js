@@ -39,12 +39,20 @@ const Table = () => {
         currentPage * itemsPerPage
     )
 
+    const formatDate = (dateString) => {
+        const date = new Date(dateString)
+        const month = date.getMonth() + 1
+        const day = date.getDate()
+        const year = date.getFullYear()
+        return `${month}-${day}-${year}`
+      }
+
     const columns = [
         { name: 'First Name', selector: 'firstName', sortable: true },
         { name: 'Last Name', selector: 'lastName', sortable: true },
-        { name: 'Start Date', selector: 'startDate', sortable: true },
+        { name: 'Start Date', selector: 'startDate', sortable: true, format: (row) => formatDate(row.startDate) },
         { name: 'Department', selector: 'department', sortable: true },
-        { name: 'Date of Birth', selector: 'dateOfBirth', sortable: true },
+        { name: 'Date of Birth', selector: 'dateOfBirth', sortable: true, format: (row) => formatDate(row.dateOfBirth) },
         { name: 'Street', selector: 'street', sortable: true },
         { name: 'City', selector: 'city', sortable: true },
         { name: 'State', selector: 'state', sortable: true },
