@@ -1,3 +1,13 @@
+
+# Description
+
+## Context
+WealthHealth is a financial company that uses the internal application HRNet to manage HR services.
+
+## Goal
+This app uses React framework and was migrated from the legacy application HRNet written in Jquery.\
+Legacy application repository: [HrNet-Jquery](https://github.com/OpenClassrooms-Student-Center/P12_Front-end)
+
 # Getting Started with Create React App
 
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
